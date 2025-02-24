@@ -38,7 +38,7 @@ def get_query():
     """
 
 
-def fetch_repositories(size = 1000):
+def fetch_repositories(size = 10):
     repositories = []
     cursor = None
     

@@ -1,4 +1,4 @@
-import json
+import csv
 import pandas as pd
 from utils import get_current_folder
 import os
@@ -24,7 +24,15 @@ def process_data(repos):
     return processed
 
 def write(processed_data):
-    output_path = os.path.join(get_current_folder(), "github_data.json")
+    output_path = os.path.join(get_current_folder(), "github_data.csv")
     
-    with open(output_path, "w") as f:
-        json.dump(processed_data, f, indent=4)
+    # Definir cabeçalhos do CSV
+    fieldnames = ["repo", "age", "primary_language", "releases", "merged_pull_requests", "closed_issues_ratio", "last_update_days"]
+    
+    with open(output_path, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        
+        writer.writeheader()
+        writer.writerows(processed_data)
+
+    print(f"Arquivo salvo em {output_path}")
