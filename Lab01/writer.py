@@ -14,20 +14,28 @@ def process_data(repos):
         processed.append({
             "repo": repo["nameWithOwner"],
             "age": age,
-            "primary_language": repo["primaryLanguage"]["name"] if repo["primaryLanguage"] else "Unknown",
+            "language": repo["primaryLanguage"]["name"] if repo["primaryLanguage"] else "Unknown",
             "releases": repo["releases"]["totalCount"],
-            "merged_pull_requests": repo["pullRequests"]["totalCount"],
+            "pull_requests": repo["pullRequests"]["totalCount"],  # Ajuste no nome
+            "closed_issues": repo["closedIssues"]["totalCount"],  # Agora temos esse campo
+            "total_issues": repo["issues"]["totalCount"],  # Adicionado para evitar erro de divisão
             "closed_issues_ratio": repo["closedIssues"]["totalCount"] / repo["issues"]["totalCount"] if repo["issues"]["totalCount"] > 0 else 0,
-            "last_update_days": last_update_days
+            "last_update_days": last_update_days,
+            "pushed_at": updated_at,  # Renomeado para bater com o código dos gráficos
+            "created_at": created_at,
+            "stars": repo["stargazerCount"],  # ⭐ Adicionando estrelas
+            "forks": repo["forkCount"],  # 🍴 Adicionando forks
+            "watchers": repo["watchers"]["totalCount"],  # 👀 Adicionando watchers
+            "collaborators": repo["collaborators"]["totalCount"] if repo["collaborators"] else 0  # 👥 Adicionando contribuidores
         })
-    
+
     return processed
 
 def write(processed_data):
     output_path = os.path.join(get_current_folder(), "github_data.csv")
     
     # Definir cabeçalhos do CSV
-    fieldnames = ["repo", "age", "primary_language", "releases", "merged_pull_requests", "closed_issues_ratio", "last_update_days"]
+    fieldnames = ["repo", "age", "language", "releases", "pull_requests", "closed_issues", "total_issues", "closed_issues_ratio", "last_update_days", "pushed_at", "created_at", "stars", "forks", "watchers", "collaborators"]
     
     with open(output_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)

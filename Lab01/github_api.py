@@ -31,6 +31,10 @@ def get_query():
                     pullRequests(states: MERGED) { totalCount }
                     issues { totalCount }
                     closedIssues: issues(states: CLOSED) { totalCount }
+                    stargazerCount
+                    forkCount
+                    watchers { totalCount }
+                    collaborators { totalCount }
                 }
                 }
             }
@@ -38,7 +42,7 @@ def get_query():
     """
 
 
-def fetch_repositories(size = 10):
+def fetch_repositories(size = 1000):
     repositories = []
     cursor = None
     
