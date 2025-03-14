@@ -21,7 +21,7 @@ Os seguintes atributos foram extraídos para análise:
 
 ### RQ01: Sistemas populares são maduros/antigos?
 
-**Média da idade dos repositórios:** 3020.5 dias
+**Mediana da idade dos repositórios:** 3020.5 dias
 
 **Moda da idade dos repositórios:** 8 anos
 
@@ -29,21 +29,21 @@ A análise mostrou que os repositórios populares possuem uma idade consideráve
 
 ### RQ02: Sistemas populares recebem muita contribuição externa?
 
-**Média de Pull Requests aceitas:** 620.5
+**Mediana de Pull Requests aceitas:** 620.5
 **Moda de Pull Requests aceitas:** 1
 
 A distribuição mostrou que muitos repositórios recebem contribuições regulares, mas a quantidade varia bastante entre projetos.
 
 ### RQ03: Sistemas populares lançam releases com frequência?
 
-**Média de Releases:** 33.0
+**Mediana de Releases:** 33.0
 **Moda de Releases:** 0
 
 Os dados indicam que repositórios populares tendem a lançar versões regularmente, embora a frequência dependa do tipo de projeto.
 
 ### RQ04: Sistemas populares são atualizados com frequência?
 
-**Média do tempo desde a última atualização:** 0 dias
+**Mediana do tempo desde a última atualização:** 0 dias
 
 A maioria dos repositórios tem atualizações frequentes, sugerindo que projetos populares mantêm um ciclo ativo de desenvolvimento diário.
 
@@ -53,7 +53,7 @@ Os repositórios analisados utilizam majoritariamente linguagens como Python, Ja
 
 ### RQ06: Sistemas populares possuem um alto percentual de issues fechadas?
 
-**Média da proporção de issues fechadas:** 0.86
+**Mediana da proporção de issues fechadas:** 0.86
 **Moda da proporçaõ de issues fechadas:** 1.00
 
 A maioria dos projetos apresenta uma boa taxa de fechamento de issues, indicando gestão ativa das contribuições e manutenção do código.
@@ -76,6 +76,5 @@ Os resultados confirmam que repositórios populares tendem a ser mais antigos, r
 ## Bônus: Comparação por Linguagem
 
 Para verificar se sistemas escritos em linguagens populares recebem mais contribuições e lançam mais releases, foi feita uma análise separada por linguagem. Os dados mostraram que linguagens como JavaScript e Python tendem a ter projetos com mais PRs e releases, enquanto linguagens menos populares apresentam menor atividade.
-
 
 Link apresentação no canvas: https://www.canva.com/design/DAGhqX1rnaw/1tZMR3ggpS7LR1UbZnsBEA/edit
