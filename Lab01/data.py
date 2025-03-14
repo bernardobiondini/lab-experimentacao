@@ -7,7 +7,7 @@ import os
 def generate_graphics():
     graficos_folder = os.path.join(get_current_folder(), "graficos")
     os.makedirs(graficos_folder, exist_ok=True)
-    # Carregar os dados (supondo que o CSV esteja no diretório correto)
+
     filePath = os.path.join(get_current_folder(), "github_data.csv")
     df = pd.read_csv(filePath)
     
