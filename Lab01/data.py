@@ -13,13 +13,17 @@ def generate_graphics():
     
     df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce', utc=True)
 
-
-    median_age = (pd.Timestamp.now().tz_localize(None) - df['created_at'].dt.tz_localize(None)).dt.days.median()
-    median_prs = df['pull_requests'].median()
-    median_releases = df['releases'].median()
-    median_updates = df['last_update_days'].median()
+    mean_age = (pd.Timestamp.now().tz_localize(None) - df['created_at'].dt.tz_localize(None)).dt.days.mean()
+    mode_age = ((pd.Timestamp.now().tz_localize(None) - df['created_at'].dt.tz_localize(None)).dt.days // 365).mode()
+    mean_prs = df['pull_requests'].mean()
+    mode_prs = df['pull_requests'].mode()
+    mean_releases = df['releases'].mean()
+    mode_releases = df['releases'].mode()
+    mean_updates = df['last_update_days'].mean()
+    mode_updates = df['last_update_days'].mode()
     language_counts = df['language'].value_counts()
-    median_closed_issues = (df['closed_issues'] / df['total_issues']).median()
+    mean_closed_issues = (df['closed_issues'] / df['total_issues']).mean()
+    mode_closed_issues = (df['closed_issues'] / df['total_issues']).mode()
 
     # Criar gráficos
     sns.set_theme(style="whitegrid")
@@ -78,8 +82,13 @@ def generate_graphics():
     plt.close()
 
     # Exibir medianas calculadas
-    print(f"Mediana da Idade dos Repositórios: {median_age} dias")
-    print(f"Mediana de Pull Requests Aceitas: {median_prs}")
-    print(f"Mediana de Releases: {median_releases}")
-    print(f"Mediana de Tempo desde Última Atualização: {median_updates} dias")
-    print(f"Mediana da Proporção de Issues Fechadas: {median_closed_issues:.2f}")
+    print(f"Média da Idade dos Repositórios: {mean_age} dias")
+    print(f"Moda da Idade dos Repositórios: {mode_age.values[0]} anos")
+    print(f"Média de Pull Requests Aceitas: {mean_prs}")
+    print(f"Moda de Pull Requests Aceitas: {mode_prs.values[0]}")
+    print(f"Média de Releases: {mean_releases}")
+    print(f"Moda de Releases: {mode_releases.values[0]}")
+    print(f"Média de Tempo desde Última Atualização: {mean_updates} dias")
+    print(f"Moda de Tempo desde Última Atualização: {mode_updates.values[0]} dias")
+    print(f"Média da Proporção de Issues Fechadas: {mean_closed_issues:.2f}")
+    print(f"Moda da Proporção de Issues Fechadas: {mode_closed_issues.values[0]:.2f}")

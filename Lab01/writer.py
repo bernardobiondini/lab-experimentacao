@@ -16,17 +16,17 @@ def process_data(repos):
             "age": age,
             "language": repo["primaryLanguage"]["name"] if repo["primaryLanguage"] else "Unknown",
             "releases": repo["releases"]["totalCount"],
-            "pull_requests": repo["pullRequests"]["totalCount"],  # Ajuste no nome
-            "closed_issues": repo["closedIssues"]["totalCount"],  # Agora temos esse campo
-            "total_issues": repo["issues"]["totalCount"],  # Adicionado para evitar erro de divisão
+            "pull_requests": repo["pullRequests"]["totalCount"],
+            "closed_issues": repo["closedIssues"]["totalCount"],
+            "total_issues": repo["issues"]["totalCount"],
             "closed_issues_ratio": repo["closedIssues"]["totalCount"] / repo["issues"]["totalCount"] if repo["issues"]["totalCount"] > 0 else 0,
             "last_update_days": last_update_days,
-            "pushed_at": updated_at,  # Renomeado para bater com o código dos gráficos
+            "pushed_at": updated_at,
             "created_at": created_at,
-            "stars": repo["stargazerCount"],  # ⭐ Adicionando estrelas
-            "forks": repo["forkCount"],  # 🍴 Adicionando forks
-            "watchers": repo["watchers"]["totalCount"],  # 👀 Adicionando watchers
-            "collaborators": repo["collaborators"]["totalCount"] if repo["collaborators"] else 0  # 👥 Adicionando contribuidores
+            "stars": repo["stargazerCount"],
+            "forks": repo["forkCount"],
+            "watchers": repo["watchers"]["totalCount"],
+            "collaborators": repo["collaborators"]["totalCount"] if repo["collaborators"] else 0
         })
 
     return processed
