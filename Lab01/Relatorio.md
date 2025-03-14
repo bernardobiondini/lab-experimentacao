@@ -62,7 +62,7 @@ A maioria dos projetos apresenta uma boa taxa de fechamento de issues, indicando
 
 Os gráficos a seguir ilustram os resultados apresentados:
 
-- Distribuição da idade dos repositórios: ![Idade](graficos/idade_repos.png)
+- Distribuição da idade dos repositórios: ![Idade](graficos/idade_repositorios.png)
 - Número de Pull Requests aceitas: ![PRs](graficos/pull_requests.png)
 - Distribuição do número de releases: ![Releases](graficos/releases.png)
 - Tempo desde última atualização: ![Última atualização](graficos/ultima_atualizacao.png)
@@ -76,3 +76,6 @@ Os resultados confirmam que repositórios populares tendem a ser mais antigos, r
 ## Bônus: Comparação por Linguagem
 
 Para verificar se sistemas escritos em linguagens populares recebem mais contribuições e lançam mais releases, foi feita uma análise separada por linguagem. Os dados mostraram que linguagens como JavaScript e Python tendem a ter projetos com mais PRs e releases, enquanto linguagens menos populares apresentam menor atividade.
+
+
+Link apresentação no canvas: https://www.canva.com/design/DAGhqX1rnaw/1tZMR3ggpS7LR1UbZnsBEA/edit
