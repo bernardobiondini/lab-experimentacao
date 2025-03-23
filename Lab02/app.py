@@ -4,6 +4,7 @@ import csv
 import subprocess
 from dotenv import load_dotenv
 from utils import get_current_folder
+import time
 
 script_dir = get_current_folder()
 dotenv_path = os.path.join(script_dir, ".env")
@@ -26,27 +27,55 @@ def get_top_repositories():
         else:
             print("Erro ao buscar repositórios", response.status_code)
             break
+        time.sleep(1)
     return repos
 
-# Clonar um repositório de teste
+# Clonar um repositório
 def clone_repository(repo_name):
-    folder = get_current_folder();
+    folder = get_current_folder()
+    repo_path = f"{folder}/repos/{repo_name.split('/')[-1]}"
     
-    if (os.path.exists(f"{folder}/repos/{repo_name.split('/')[-1]}")):
-        print("Repositório já clonado")
-        return
+    if os.path.exists(repo_path):
+        print(f"Repositório {repo_name} já clonado")
+        return repo_path
     
-    os.system(f"git clone https://github.com/{repo_name}.git {folder}/repos/{repo_name.split('/')[-1]}")
+    os.system(f"git clone https://github.com/{repo_name}.git {repo_path}")
+    return repo_path
 
 # Executar ferramenta CK e coletar métricas
-def run_ck_tool(repo_name):
+def run_ck_tool(repo_path, repo_name):
     current_folder = get_current_folder()
-    repo_dir = repo_name.split('/')[-1]
-    ck_output_file = f"{current_folder}/metrics/{repo_dir}_metrics.csv"
-    repo_dir = f"{get_current_folder()}/repos/{repo_dir}"
-    command = subprocess.run(["java", "-jar", "ck.jar", repo_dir, "true", "0", "false", ck_output_file])
-    print(command)
+    metrics_dir = f"{current_folder}/metrics"
+
+    ck_output_file = f"{metrics_dir}/{repo_name.split('/')[-1]}_metrics_"
+
+    command = subprocess.run(
+        ["java", "-jar", "ck.jar", repo_path, "true", "0", "false", ck_output_file],
+        capture_output=True,
+        text=True,
+    )
+
+    if command.returncode != 0:
+        print(f"Erro ao executar CK para {repo_name}: {command.stderr}")
+        return None
+
+    print(f"✅ CK executado com sucesso! Métricas salvas em {ck_output_file}")
     return ck_output_file
+
+# Deleta o repositório clonado após a análise
+def delete_repository(repo_path):
+    if not os.path.exists(repo_path):
+        print(f"O repositório {repo_path} não existe.")
+        return
+    
+    try:
+        if os.name == "nt":
+            os.system(f"rmdir /s /q {repo_path}")
+            return
+        os.system(f"rm -rf {repo_path}")
+        return
+    except Exception as e:
+        print(f"Ocorreu um erro ao tentar deletar o repositório: {e}")
 
 # Salvar dados coletados em CSV
 def save_to_csv(filename, data):
@@ -63,10 +92,12 @@ if __name__ == "__main__":
     repos = get_top_repositories()
     save_to_csv("top_java_repositories.csv", repos)
     
-    # Clonando e analisando um repositório de teste
-    if repos:
-        test_repo = repos[1][0]
-        print(f"Clonando repositório: {test_repo}")
-        clone_repository(test_repo)
-        ck_file = run_ck_tool(test_repo)
+    for repo in repos:
+        repo_name = repo[0]
+        print(f"Clonando repositório: {repo_name}")
+        repo_path = clone_repository(repo_name)
+        print(f"Executando análise CK no {repo_name}")
+        ck_file = run_ck_tool(repo_path, repo_name)
+        delete_repository(repo_path)
         print(f"Métricas salvas em {ck_file}")
+        time.sleep(2)
