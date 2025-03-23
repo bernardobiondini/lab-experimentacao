@@ -16,7 +16,7 @@ HEADERS = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
 # Obter os 1000 repositórios Java mais populares
 def get_top_repositories():
     repos = []
-    url = "https://api.github.com/search/repositories?q=language:java&sort=stars&order=desc&per_page=100"
+    url = "https://api.github.com/search/repositories?q=language:java&sort=stars&order=desc&per_page=10"
     
     for page in range(1, 11):  # Paginação
         response = requests.get(f"{url}&page={page}", headers=HEADERS)
@@ -30,11 +30,23 @@ def get_top_repositories():
 
 # Clonar um repositório de teste
 def clone_repository(repo_name):
-    os.system(f"git clone https://github.com/{repo_name}.git")
+    folder = get_current_folder();
+    
+    if (os.path.exists(f"{folder}/repos/{repo_name.split('/')[-1]}")):
+        print("Repositório já clonado")
+        return
+    
+    os.system(f"git clone https://github.com/{repo_name}.git {folder}/repos/{repo_name.split('/')[-1]}")
 
 # Executar ferramenta CK e coletar métricas
 def run_ck_tool(repo_name):
-    print("Executando analise")
+    current_folder = get_current_folder()
+    repo_dir = repo_name.split('/')[-1]
+    ck_output_file = f"{current_folder}/metrics/{repo_dir}_metrics.csv"
+    repo_dir = f"{get_current_folder()}/repos/{repo_dir}"
+    command = subprocess.run(["java", "-jar", "ck.jar", repo_dir, "true", "0", "false", ck_output_file])
+    print(command)
+    return ck_output_file
 
 # Salvar dados coletados em CSV
 def save_to_csv(filename, data):
@@ -50,8 +62,8 @@ if __name__ == "__main__":
     
     # Clonando e analisando um repositório de teste
     if repos:
-        test_repo = repos[0][0]
+        test_repo = repos[1][0]
         print(f"Clonando repositório: {test_repo}")
         clone_repository(test_repo)
-        print(f"Executando análise CK no {test_repo}")
-        run_ck_tool(test_repo)
+        ck_file = run_ck_tool(test_repo)
+        print(f"Métricas salvas em {ck_file}")
