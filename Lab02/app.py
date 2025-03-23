@@ -16,7 +16,7 @@ HEADERS = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
 # Obter os 1000 repositórios Java mais populares
 def get_top_repositories():
     repos = []
-    url = "https://api.github.com/search/repositories?q=language:java&sort=stars&order=desc&per_page=10"
+    url = "https://api.github.com/search/repositories?q=language:java&sort=stars&order=desc&per_page=100"
     
     for page in range(1, 11):  # Paginação
         response = requests.get(f"{url}&page={page}", headers=HEADERS)
@@ -57,6 +57,9 @@ def save_to_csv(filename, data):
         writer.writerows(data)
 
 if __name__ == "__main__":
+    os.makedirs(get_current_folder() + "/repos", exist_ok=True)
+    os.makedirs(get_current_folder() + "/metrics", exist_ok=True)
+
     repos = get_top_repositories()
     save_to_csv("top_java_repositories.csv", repos)
     
