@@ -46,12 +46,5 @@ Antes da análise dos dados, formulamos as seguintes hipóteses:
 
 ## 4. Discussão
 
-Com base nos resultados obtidos, discutiremos a validade das hipóteses formuladas e a relação entre as métricas analisadas. Gráficos de correlação serão apresentados para evidenciar padrões e comportamentos entre os repositórios Java.
 
 ## 5. Conclusão
-
-A conclusão será formulada com base na análise dos dados obtidos, indicando se as hipóteses foram confirmadas ou refutadas. Além disso, serão sugeridas melhorias na metodologia e possíveis direções para estudos futuros.
-
----
-
-**Bônus:** Para melhor análise, também serão gerados **gráficos de correlação** e será aplicado um teste estatístico (como Spearman ou Pearson) para validar as relações entre as variáveis.
