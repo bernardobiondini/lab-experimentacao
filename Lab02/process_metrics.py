@@ -6,7 +6,7 @@ from utils import get_current_folder
 def process_ck_metrics():
     metrics_folder = f"{get_current_folder()}/metrics"
     repos_file = f"{get_current_folder()}/top_java_repositories.csv"  # Arquivo com dados dos repositórios
-    output_file = f"{metrics_folder}/final_metrics.csv"
+    output_file = f"{get_current_folder()}/final_metrics.csv"
 
     # Carregar informações dos repositórios para cruzar com as métricas
     repos_df = pd.read_csv(repos_file)
@@ -17,7 +17,7 @@ def process_ck_metrics():
     for file in os.listdir(metrics_folder):
         if file.endswith("_class.csv"):  # Apenas arquivos que terminam com "_class.csv"
             file_path = os.path.join(metrics_folder, file)
-            repo_name = file.replace("_class.csv", "")
+            repo_name = file.replace("_metrics_class.csv", "")
 
             try:
                 # Ler CSV e selecionar colunas necessárias
