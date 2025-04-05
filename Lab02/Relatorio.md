@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-O objetivo deste estudo é analisar aspectos da qualidade de repositórios desenvolvidos na linguagem Java, correlacionando-os com características do seu processo de desenvolvimento. Para isso, foram coletadas diversas métricas de qualidade utilizando a ferramenta CK, e os dados foram cruzados com informações sobre popularidade, tamanho, atividade e maturidade dos repositórios.
+O objetivo deste estudo é analisar aspectos da qualidade de repositórios desenvolvidos na linguagem Java, correlacionando-os com características do seu processo de desenvolvimento. Para isso, foram coletadas diversas métricas de qualidade utilizando a ferramenta CK, e os dados foram cruzados com informações sobre **popularidade, tamanho, atividade e maturidade** dos repositórios.
 
 ## 2. Metodologia
 
@@ -14,12 +14,12 @@ A coleta de dados seguiu os seguintes passos:
 2. Para cada repositório, foram coletadas informações como:
    * **Popularidade** : número de estrelas.
    * **Tamanho** : linhas de código (LOC) e linhas comentadas (CLOC).
-   * **Atividade** : número de releases (aproximado pelo número de forks).
+   * **Atividade** : número de releases.
    * **Maturidade** : idade do repositório, calculada com base na data de criação.
 3. Os repositórios foram clonados localmente, e a ferramenta **CK** foi utilizada para calcular métricas de qualidade, incluindo:
-   * **CBO** (Coupling Between Objects)
-   * **DIT** (Depth Inheritance Tree)
-   * **LCOM** (Lack of Cohesion of Methods)
+   * **CBO** (Coupling Between Objects) Mede o acoplamento entre classes, indicando dependências excessivas entre módulos.
+   * **DIT** (Depth Inheritance Tree) Mede a profundidade da hierarquia de herança, o que pode impactar a complexidade da manutenção.
+   * **LCOM** (Lack of Cohesion of Methods) Avalia a coesão de uma classe, indicando se os métodos são bem relacionados entre si.
 4. Os resultados foram consolidados em um arquivo **final_metrics.csv** contendo os valores agregados por repositório.
 
 ### 2.2 Perguntas de Pesquisa
@@ -106,9 +106,12 @@ Isso indica que  **projetos maiores podem ter hierarquias de herança um pouco m
 
 O **gráfico de dispersão** mostrou que  **tamanho e profundidade de herança variam bastante entre os repositórios** .
 
-## 4. Discussão
+## Gráficos
 
-Os resultados sugerem que algumas das relações esperadas entre as métricas não são tão fortes quanto o previsto. A relação entre popularidade e tamanho do código foi a única com alguma significância, mas ainda assim fraca. Outros fatores, como metodologia de desenvolvimento e histórico do projeto, podem influenciar mais do que apenas idade e atividade.
+![Popularidade vs LOC](graphics/stars_vs_loc.png)
+![Maturidade vs Acoplamento](graphics/age_vs_cbo.png)
+![Numero de releases vs Coesão](graphics/releases_vs_lcom.png)
+![LOC vs Herança](graphics/loc_vs_dit.png)
 
 ## 5. Conclusão
 
