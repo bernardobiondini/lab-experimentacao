@@ -76,10 +76,10 @@ A tabela a seguir resume as estatísticas descritivas para o tempo de resposta d
 
 | API_Type | count | mean (ms) | std (ms) | min (ms) | 25% (ms) | 50% (ms) | 75% (ms) | max (ms) |
 |----------|-------|-----------|----------|----------|----------|----------|----------|----------|
-| GraphQL  | 102.0 | 2.61      | 1.90     | 0.99     | 2.35     | 2.41     | 2.41     | 20.44    |
-| REST     | 102.0 | 1.53      | 0.35     | 1.00     | 1.45     | 1.48     | 1.48     | 4.24     |
+| GraphQL  | 102.0 | 2.29      | 1.45     | 1.80     | 2.03     | 2.20     | 2.20     | 16.15    |
+| REST     | 102.0 | 1.22      | 0.36     | 1.01     | 1.10     | 1.25     | 1.25     | 2.83     |
 
-Conforme os dados, a API REST apresentou um tempo de resposta médio menor (1.53 ms) em comparação com a API GraphQL (2.61 ms). A variação (desvio padrão) também foi menor para a API REST (0.35 ms) do que para a API GraphQL (1.90 ms), indicando maior consistência. O gráfico de boxplot abaixo ilustra a distribuição do tempo de resposta para ambas as APIs.
+Conforme os dados, a API REST apresentou um tempo de resposta médio menor (1.22 ms) em comparação com a API GraphQL (2.29 ms). A variação (desvio padrão) também foi menor para a API REST (0.36 ms) do que para a API GraphQL (1.45 ms), indicando maior consistência. O gráfico de boxplot abaixo ilustra a distribuição do tempo de resposta para ambas as APIs.
 
 ![Tempo de Resposta: GraphQL vs REST](./response_time_boxplot.png)
 
